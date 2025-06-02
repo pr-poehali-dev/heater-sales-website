@@ -2,6 +2,11 @@ import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 
 const HeroSection = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.querySelector(sectionId);
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <section className="bg-gradient-to-br from-orange-50 to-orange-100 py-20">
       <div className="container mx-auto px-4 text-center">
@@ -18,6 +23,7 @@ const HeroSection = () => {
             <Button
               size="lg"
               className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4"
+              onClick={() => scrollToSection("#catalog")}
             >
               <Icon name="Flame" size={20} />
               Посмотреть каталог
@@ -26,6 +32,7 @@ const HeroSection = () => {
               variant="outline"
               size="lg"
               className="border-orange-500 text-orange-500 hover:bg-orange-50 px-8 py-4"
+              onClick={() => scrollToSection("#contact")}
             >
               <Icon name="Phone" size={20} />
               Получить консультацию

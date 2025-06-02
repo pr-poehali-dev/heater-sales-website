@@ -2,8 +2,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Icon from "@/components/ui/icon";
+import { useState } from "react";
 
 const ProductCatalog = () => {
+  const [cartItems, setCartItems] = useState<number[]>([]);
+
+  const addToCart = (productId: number, productName: string) => {
+    setCartItems((prev) => [...prev, productId]);
+    alert(`${productName} добавлен в корзину!`);
+  };
+
   const products = [
     {
       id: 1,
@@ -121,7 +129,10 @@ const ProductCatalog = () => {
                   </div>
                 </div>
 
-                <Button className="w-full bg-orange-500 hover:bg-orange-600">
+                <Button
+                  className="w-full bg-orange-500 hover:bg-orange-600"
+                  onClick={() => addToCart(product.id, product.name)}
+                >
                   <Icon name="ShoppingCart" size={16} />В корзину
                 </Button>
               </CardContent>

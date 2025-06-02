@@ -1,10 +1,25 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
+import { useState } from "react";
 
 const ContactSection = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleSubmit = () => {
+    if (!formData.name || !formData.phone) {
+      alert("Пожалуйста, заполните имя и телефон");
+      return;
+    }
+    alert("Спасибо! Мы свяжемся с вами в ближайшее время.");
+    setFormData({ name: "", phone: "", message: "" });
+  };
   return (
-    <section className="py-16 bg-gray-900 text-white">
+    <section id="contact" className="py-16 bg-gray-900 text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4 font-montserrat">
@@ -81,6 +96,10 @@ const ContactSection = () => {
                 <input
                   type="text"
                   placeholder="Ваше имя"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
                   className="w-full p-3 rounded-md bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-orange-500 outline-none"
                 />
               </div>
@@ -88,6 +107,10 @@ const ContactSection = () => {
                 <input
                   type="tel"
                   placeholder="Номер телефона"
+                  value={formData.phone}
+                  onChange={(e) =>
+                    setFormData({ ...formData, phone: e.target.value })
+                  }
                   className="w-full p-3 rounded-md bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-orange-500 outline-none"
                 />
               </div>
@@ -95,10 +118,17 @@ const ContactSection = () => {
                 <textarea
                   placeholder="Площадь помещения и пожелания"
                   rows={3}
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
                   className="w-full p-3 rounded-md bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-orange-500 outline-none resize-none"
                 />
               </div>
-              <Button className="w-full bg-orange-500 hover:bg-orange-600">
+              <Button
+                className="w-full bg-orange-500 hover:bg-orange-600"
+                onClick={handleSubmit}
+              >
                 <Icon name="Send" size={16} />
                 Получить консультацию
               </Button>
